@@ -385,7 +385,7 @@ $("btnStart").addEventListener("click", async () => {
   }
 });
 
-$("btnNext").addEventListener("click", async () => {
+$("btnNext").onclick = async () => {
   // 「次へ」は最低1回の再生完了が必須
   if (playsDoneGlobal < 1) {
     $("trialErr").textContent =
@@ -401,12 +401,7 @@ $("btnNext").addEventListener("click", async () => {
   const sad = getRadio("sad");
   const unnatural = getRadio("unnatural");
 
-  if (
-    anger === "" ||
-    joy === "" ||
-    sad === "" ||
-    unnatural === ""
-  ) {
+  if (anger === "" || joy === "" || sad === "" || unnatural === "") {
     $("trialErr").textContent =
       "怒り・喜び・悲しみ・違和感のすべてについて、1〜5のいずれかを選択してください。";
     return;
@@ -414,18 +409,15 @@ $("btnNext").addEventListener("click", async () => {
 
   const unnaturalV = parseInt(unnatural, 10);
   const needReasons = (unnaturalV >= 2);
-
   const otherText = $("r_other_text").value.trim();
 
   // ===== 違和感が2〜5なら「理由」を1つ以上必須にする =====
   if (needReasons) {
-    const rNatural = $("r_naturalness").checked;
-    const rClarity = $("r_clarity").checked;
-    const rDegrad = $("r_degradation").checked;
-    const rDefect = $("r_defect").checked;
-    const rOther = $("r_other").checked;
-
-    const anyChecked = rNatural || rClarity || rDegrad || rDefect || rOther;
+    // reasonsBlock 内のチェックボックスが1つ以上チェックされているか
+    const reasonChecks = Array.from(
+      document.querySelectorAll("#reasonsBlock input[type='checkbox']")
+    );
+    const anyChecked = reasonChecks.some(cb => cb.checked);
 
     if (!anyChecked) {
       $("trialErr").textContent =
@@ -434,7 +426,7 @@ $("btnNext").addEventListener("click", async () => {
     }
 
     // 「その他」を選んだ場合は自由記述も必須
-    if (rOther && otherText.length === 0) {
+    if ($("r_other").checked && otherText.length === 0) {
       $("trialErr").textContent =
         "「その他」を選択した場合は、理由を自由記述してください。";
       return;
@@ -463,7 +455,6 @@ $("btnNext").addEventListener("click", async () => {
     rating_sadness: parseInt(sad, 10),
     rating_unnatural: parseInt(unnatural, 10),
 
-    // 違和感2〜5のときだけ意味がある（それ以外はfalse/空にする）
     reason_naturalness: needReasons ? $("r_naturalness").checked : false,
     reason_clarity: needReasons ? $("r_clarity").checked : false,
     reason_degradation: needReasons ? $("r_degradation").checked : false,
@@ -491,7 +482,6 @@ $("btnNext").addEventListener("click", async () => {
 
   try {
     await postByForm(GAS_URL, payload);
-
     $("finishMsg").textContent = "送信しました。ご協力ありがとうございました。";
     $("finishStatus").innerHTML =
       `<div class="ok">送信完了（スプレッドシートに反映されます）</div>`;
@@ -499,8 +489,10 @@ $("btnNext").addEventListener("click", async () => {
     $("finishMsg").textContent = "送信に失敗しました（通信エラー）。";
     $("finishStatus").innerHTML = `<div class="warn">${String(e)}</div>`;
   }
-});
+};
+
 </script>
 </body>
 </html>
+
 
