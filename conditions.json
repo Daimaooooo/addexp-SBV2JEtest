@@ -1,0 +1,515 @@
+[
+  {
+    "stimulus_id": 1,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "Neutral",
+    "strength_label": "Medium",
+    "style_weight": 1.0,
+    "filename": "S1_Neutral_Medium.wav"
+  },
+  {
+    "stimulus_id": 2,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S1_sad_2.0.wav"
+  },
+  {
+    "stimulus_id": 3,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S1_sad_4.0.wav"
+  },
+  {
+    "stimulus_id": 4,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S1_anger_3.0.wav"
+  },
+  {
+    "stimulus_id": 5,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S1_sad_3.0.wav"
+  },
+  {
+    "stimulus_id": 6,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S1_anger_0.5.wav"
+  },
+  {
+    "stimulus_id": 7,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S1_happy_1.0.wav"
+  },
+  {
+    "stimulus_id": 8,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S1_happy_4.0.wav"
+  },
+  {
+    "stimulus_id": 9,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S1_sad_0.5.wav"
+  },
+  {
+    "stimulus_id": 10,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S1_happy_3.0.wav"
+  },
+  {
+    "stimulus_id": 11,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S1_anger_1.0.wav"
+  },
+  {
+    "stimulus_id": 12,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S1_happy_0.5.wav"
+  },
+  {
+    "stimulus_id": 13,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S1_sad_5.0.wav"
+  },
+  {
+    "stimulus_id": 14,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S1_happy_2.0.wav"
+  },
+  {
+    "stimulus_id": 15,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S1_anger_5.0.wav"
+  },
+  {
+    "stimulus_id": 16,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "happy",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S1_happy_5.0.wav"
+  },
+  {
+    "stimulus_id": 17,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S1_anger_4.0.wav"
+  },
+  {
+    "stimulus_id": 18,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "anger",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S1_anger_2.0.wav"
+  },
+  {
+    "stimulus_id": 19,
+    "sentence_id": "S1",
+    "sentence_text": "野辺山宇宙電波観測所には、直径45メートルの電波望遠鏡があります。",
+    "emotion": "sad",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S1_sad_1.0.wav"
+  },
+  {
+    "stimulus_id": 20,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "Neutral",
+    "strength_label": "Medium",
+    "style_weight": 1.0,
+    "filename": "S2_Neutral_Medium.wav"
+  },
+  {
+    "stimulus_id": 21,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S2_anger_4.0.wav"
+  },
+  {
+    "stimulus_id": 22,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S2_anger_0.5.wav"
+  },
+  {
+    "stimulus_id": 23,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S2_happy_1.0.wav"
+  },
+  {
+    "stimulus_id": 24,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S2_sad_3.0.wav"
+  },
+  {
+    "stimulus_id": 25,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S2_anger_2.0.wav"
+  },
+  {
+    "stimulus_id": 26,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S2_happy_5.0.wav"
+  },
+  {
+    "stimulus_id": 27,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S2_sad_4.0.wav"
+  },
+  {
+    "stimulus_id": 28,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S2_sad_5.0.wav"
+  },
+  {
+    "stimulus_id": 29,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S2_anger_1.0.wav"
+  },
+  {
+    "stimulus_id": 30,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S2_happy_4.0.wav"
+  },
+  {
+    "stimulus_id": 31,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S2_happy_0.5.wav"
+  },
+  {
+    "stimulus_id": 32,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S2_sad_1.0.wav"
+  },
+  {
+    "stimulus_id": 33,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S2_sad_2.0.wav"
+  },
+  {
+    "stimulus_id": 34,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S2_happy_2.0.wav"
+  },
+  {
+    "stimulus_id": 35,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "sad",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S2_sad_0.5.wav"
+  },
+  {
+    "stimulus_id": 36,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S2_anger_5.0.wav"
+  },
+  {
+    "stimulus_id": 37,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "anger",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S2_anger_3.0.wav"
+  },
+  {
+    "stimulus_id": 38,
+    "sentence_id": "S2",
+    "sentence_text": "効果的なエアコン暖房の節電を行うために必要な心がけは、どのようなことでしょうか。",
+    "emotion": "happy",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S2_happy_3.0.wav"
+  },
+  {
+    "stimulus_id": 39,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "Neutral",
+    "strength_label": "Medium",
+    "style_weight": 1.0,
+    "filename": "S3_Neutral_Medium.wav"
+  },
+  {
+    "stimulus_id": 40,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S3_happy_2.0.wav"
+  },
+  {
+    "stimulus_id": 41,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S3_sad_0.5.wav"
+  },
+  {
+    "stimulus_id": 42,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S3_happy_5.0.wav"
+  },
+  {
+    "stimulus_id": 43,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S3_anger_1.0.wav"
+  },
+  {
+    "stimulus_id": 44,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S3_sad_1.0.wav"
+  },
+  {
+    "stimulus_id": 45,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "1.0",
+    "style_weight": 1.0,
+    "filename": "S3_happy_1.0.wav"
+  },
+  {
+    "stimulus_id": 46,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S3_anger_2.0.wav"
+  },
+  {
+    "stimulus_id": 47,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S3_sad_5.0.wav"
+  },
+  {
+    "stimulus_id": 48,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S3_happy_0.5.wav"
+  },
+  {
+    "stimulus_id": 49,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S3_happy_3.0.wav"
+  },
+  {
+    "stimulus_id": 50,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "5.0",
+    "style_weight": 5.0,
+    "filename": "S3_anger_5.0.wav"
+  },
+  {
+    "stimulus_id": 51,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S3_anger_3.0.wav"
+  },
+  {
+    "stimulus_id": 52,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "3.0",
+    "style_weight": 3.0,
+    "filename": "S3_sad_3.0.wav"
+  },
+  {
+    "stimulus_id": 53,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "happy",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S3_happy_4.0.wav"
+  },
+  {
+    "stimulus_id": 54,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "0.5",
+    "style_weight": 0.5,
+    "filename": "S3_anger_0.5.wav"
+  },
+  {
+    "stimulus_id": 55,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "2.0",
+    "style_weight": 2.0,
+    "filename": "S3_sad_2.0.wav"
+  },
+  {
+    "stimulus_id": 56,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "sad",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S3_sad_4.0.wav"
+  },
+  {
+    "stimulus_id": 57,
+    "sentence_id": "S3",
+    "sentence_text": "千住宿は、江戸との往来者が多かったほか、江戸から移り住んできた人も多くいました。",
+    "emotion": "anger",
+    "strength_label": "4.0",
+    "style_weight": 4.0,
+    "filename": "S3_anger_4.0.wav"
+  }
+]

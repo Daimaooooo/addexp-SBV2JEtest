@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>音声主観評価 実験</title>
+  <style>
+    body { font-family: sans-serif; max-width: 980px; margin: 24px auto; padding: 0 12px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin: 12px 0; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    fieldset { border: 1px solid #ddd; border-radius: 10px; padding: 10px 12px; }
+    legend { padding: 0 6px; }
+    .muted { color: #666; font-size: 13px; }
+    .warn { color: #b00; font-weight: 700; }
+    .ok { color: #0a7; font-weight: 700; }
+    .scale label { margin-right: 10px; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:#f2f2f2; font-size:12px; }
+    code { background:#f6f6f6; padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+<h1>音声主観評価 実験</h1>
+<p class="muted">
+評価基準：1=全く感じない / 2=少し感じる / 3=適度に感じる / 4=強く感じる / 5=とても強く感じる<br/>
+※各音声は原則1回。希望があれば「もう一度だけ再生」できます（最大2回）。<br/>
+※「次へ」を押すには、音声を最後まで1回以上再生する必要があります。
+</p>
+
+<div id="setup" class="card">
+  <h2>事前アンケート</h2>
+  <div class="row">
+    <span class="muted">参加者ID（自動割り当て）: <code id="pidDisplay"></code></span>
+  </div>
+
+  <div class="row">
+    <label>性別:
+      <select id="gender">
+        <option value="">選択してください</option>
+        <option value="male">男</option>
+        <option value="female">女</option>
+      </select>
+    </label>
+
+    <label>年齢:
+      <select id="age">
+        <option value="">選択してください</option>
+        <option value="10s">10代</option>
+        <option value="20s">20代</option>
+        <option value="30s">30代</option>
+        <option value="40s">40代</option>
+        <option value="50s">50代</option>
+        <option value="60s">60代</option>
+        <option value="70s+">70代〜</option>
+      </select>
+    </label>
+
+    <label>合成音声に抵抗感がない:
+      <select id="familiar">
+        <option value="">選択してください</option>
+        <option value="yes">はい</option>
+        <option value="no">いいえ</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="row">
+    <button id="btnStart">開始</button>
+    <span id="setupErr" class="warn"></span>
+  </div>
+
+  <p class="muted">
+    ※実験は自動的にスプレッドシートへ送信されます（CSV提出不要）。
+  </p>
+</div>
+
+<div id="trial" class="card" style="display:none;">
+  <div class="row">
+    <h2 style="margin:0;">評価</h2>
+    <span id="progress" class="pill"></span>
+    <span id="meta" class="muted"></span>
+  </div>
+
+  <p id="sentence" style="font-size: 18px;"></p>
+
+  <div class="row">
+    <!-- controls を出さない（再生回数をUIで制御する） -->
+    <audio id="player" preload="auto"></audio>
+    <button id="btnPlay">再生（残り2回）</button>
+    <button id="btnReplay" disabled>もう一度だけ再生（残り1回）</button>
+    <span id="playInfo" class="muted"></span>
+  </div>
+
+  <fieldset>
+    <legend>怒り</legend>
+    <div class="scale" id="rateAnger"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>喜び</legend>
+    <div class="scale" id="rateJoy"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>悲しみ</legend>
+    <div class="scale" id="rateSad"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>合成音声の違和感</legend>
+    <div class="scale" id="rateUnnatural"></div>
+
+    <div id="reasonsBlock" style="display:none; margin-top:10px;">
+      <div class="muted">違和感の理由（複数選択可）</div>
+      <div class="row">
+        <label><input type="checkbox" id="r_naturalness"> 音声の自然度</label>
+        <label><input type="checkbox" id="r_clarity"> 音声の明瞭度</label>
+        <label><input type="checkbox" id="r_degradation"> 音声の劣化具合</label>
+        <label><input type="checkbox" id="r_defect"> 音声の欠陥（音切れなど）の有無</label>
+        <label><input type="checkbox" id="r_other"> その他</label>
+      </div>
+      <div class="row" style="width:100%;">
+        <textarea id="r_other_text" rows="2" style="width:100%;" placeholder="その他（自由記述：このように聞こえた等も可）"></textarea>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="row" style="margin-top:12px;">
+    <button id="btnNext">次へ</button>
+    <span id="trialErr" class="warn"></span>
+  </div>
+</div>
+
+<div id="finish" class="card" style="display:none;">
+  <h2>送信中...</h2>
+  <p id="finishMsg" class="muted"></p>
+  <div id="finishStatus"></div>
+</div>
+
+<script>
+/*** ★GASのWebアプリURL（/exec） ***/
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxJgluf7msy0IQZuyyFrVAnalykv00f1W24jWyWAWgORii2idlK1SLc3xYE0oh1PLNP2Q/exec";
+
+/*** 音声フォルダ構成 ***/
+const audioRoot = "audio";
+
+/*** 2モデルのみ ***/
+const models = [
+  { id: "MYSELF-jvnv-F2-jp", label: "SameCorpus" },
+  { id: "MYSELF-jvnv-F2-jp-nonBERT", label: "SameCorpus_BERTFrozen" },
+];
+
+/*** 被験者を1モデルに割り当て（57本のまま） ***/
+function assignModel(participantId) {
+  const seed = participantId.split("").reduce((a,c)=>a + c.charCodeAt(0), 0);
+  return models[seed % models.length];
+}
+
+/*** DOM helper ***/
+const $ = (id) => document.getElementById(id);
+
+function mkScale(containerId, name) {
+  const el = $(containerId);
+  el.innerHTML = "";
+  for (let v = 1; v <= 5; v++) {
+    const lab = document.createElement("label");
+    lab.innerHTML = `<input type="radio" name="${name}" value="${v}"> ${v}`;
+    el.appendChild(lab);
+  }
+}
+mkScale("rateAnger", "anger");
+mkScale("rateJoy", "joy");
+mkScale("rateSad", "sad");
+mkScale("rateUnnatural", "unnatural");
+
+function getRadio(name) {
+  const els = document.querySelectorAll(`input[name="${name}"]`);
+  for (const e of els) if (e.checked) return e.value;
+  return "";
+}
+
+function clearTrialInputs() {
+  for (const n of ["anger","joy","sad","unnatural"]) {
+    const els = document.querySelectorAll(`input[name="${n}"]`);
+    for (const e of els) e.checked = false;
+  }
+  $("reasonsBlock").style.display = "none";
+  for (const id of ["r_naturalness","r_clarity","r_degradation","r_defect","r_other"]) $(id).checked = false;
+  $("r_other_text").value = "";
+}
+
+async function loadConditions() {
+  const res = await fetch("conditions.json");
+  if (!res.ok) throw new Error("conditions.json を読み込めませんでした");
+  return await res.json();
+}
+
+function uuid() {
+  // 参加者IDは完全自動
+  return "P" + Math.random().toString(16).slice(2) + Date.now().toString(16);
+}
+
+/*** conditions.json の順番をそのまま使用 ***/
+let conditions = [];
+let trials = [];
+let idx = 0;
+
+let participant = null;
+let responses = [];
+
+// この試行で「最後まで再生」した回数（0/1/2）
+let playsDoneGlobal = 0;
+
+function buildTrials(assignedModel) {
+  return conditions.map((c, i) => ({
+    trial_index: i + 1,
+    stimulus_id: (c.stimulus_id ?? (i + 1)),
+    sentence_id: c.sentence_id,
+    sentence_text: c.sentence_text,
+    emotion: c.emotion,
+    strength_label: c.strength_label,
+    style_weight: c.style_weight,
+    filename: c.filename,
+    audio_path: `${audioRoot}/${assignedModel.id}/${c.filename}`,
+    _shown_at: 0,
+  }));
+}
+
+function renderTrial() {
+  const t = trials[idx];
+
+  $("progress").textContent = `${idx+1} / ${trials.length}`;
+  $("meta").textContent = `ID:${t.stimulus_id}`;
+  $("sentence").textContent = t.sentence_text;
+
+  const player = $("player");
+  player.src = t.audio_path;
+  player.load();
+
+  // ===== 再生回数制御（最大2回） =====
+  playsDoneGlobal = 0;
+  let isPlaying = false;
+
+  $("btnPlay").disabled = false;
+  $("btnReplay").disabled = true;
+
+  $("btnPlay").textContent = "再生（残り2回）";
+  $("btnReplay").textContent = "もう一度だけ再生（残り1回）";
+  $("playInfo").textContent = "まず「再生」を押してください（最大2回、原則1回）。";
+
+  const startPlay = async () => {
+    if (isPlaying) return;
+    if (playsDoneGlobal >= 2) return;
+
+    // 常に先頭から
+    player.currentTime = 0;
+
+    isPlaying = true;
+    try {
+      await player.play();
+      $("trialErr").textContent = "";
+    } catch (e) {
+      $("playInfo").textContent = "再生できませんでした。もう一度押してください。";
+      isPlaying = false;
+    }
+  };
+
+  $("btnPlay").onclick = () => startPlay();
+  $("btnReplay").onclick = () => startPlay();
+
+  player.onended = () => {
+    isPlaying = false;
+    playsDoneGlobal += 1;
+
+    if (playsDoneGlobal === 1) {
+      // 1回目終了 → 2回目希望者のみ
+      $("btnPlay").disabled = true;
+      $("btnReplay").disabled = false;
+      $("btnPlay").textContent = "再生（残り1回）";
+      $("btnReplay").textContent = "もう一度だけ再生（残り1回）";
+      $("playInfo").textContent = "必要なら、もう一度だけ再生できます。";
+    } else {
+      // 2回目終了 → ロック
+      $("btnPlay").disabled = true;
+      $("btnReplay").disabled = true;
+      $("btnPlay").textContent = "再生（残り0回）";
+      $("btnReplay").textContent = "もう一度だけ再生（残り0回）";
+      $("playInfo").textContent = "再生は最大2回です。";
+    }
+  };
+
+  player.onpause = () => {
+    // ended以外のpauseでも再生中フラグを戻す
+    isPlaying = false;
+  };
+
+  clearTrialInputs();
+  $("trialErr").textContent = "";
+  t._shown_at = Date.now();
+}
+
+// 違和感が2〜5なら理由欄を表示
+document.addEventListener("change", (e) => {
+  if (e.target && e.target.name === "unnatural") {
+    const v = parseInt(getRadio("unnatural") || "0", 10);
+    $("reasonsBlock").style.display = (v >= 2) ? "block" : "none";
+  }
+});
+
+/*** GASへフォームでPOST（CORS回避） ***/
+function postByForm(url, payloadObj) {
+  return new Promise((resolve) => {
+    const iframeName = "post_iframe_" + Date.now();
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+    form.target = iframeName;
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "payload";
+    input.value = JSON.stringify(payloadObj);
+
+    form.appendChild(input);
+    document.body.appendChild(form);
+
+    form.submit();
+
+    setTimeout(() => {
+      form.remove();
+      iframe.remove();
+      resolve(true);
+    }, 1200);
+  });
+}
+
+$("btnStart").addEventListener("click", async () => {
+  $("setupErr").textContent = "";
+
+  if (!GAS_URL || !GAS_URL.includes("/exec")) {
+    $("setupErr").textContent = "GAS_URL が正しくありません（/exec のURLを設定してください）";
+    return;
+  }
+
+  const gender = $("gender").value;
+  const age = $("age").value;
+  const familiar = $("familiar").value;
+  if (!gender || !age || !familiar) {
+    $("setupErr").textContent = "性別・年齢・抵抗感の有無を選択してください";
+    return;
+  }
+
+  try {
+    conditions = await loadConditions();
+
+    // 参加者IDは必ず自動生成
+    const pid = uuid();
+    const assigned = assignModel(pid);
+    $("pidDisplay").textContent = pid;
+
+    participant = {
+      participant_id: pid,
+      gender,
+      age_group: age,
+      familiar_tts: familiar,
+      assigned_model: assigned.id,
+      started_at: new Date().toISOString(),
+    };
+
+    trials = buildTrials(assigned);
+    idx = 0;
+    responses = [];
+
+    $("setup").style.display = "none";
+    $("trial").style.display = "block";
+    renderTrial();
+  } catch (e) {
+    $("setupErr").textContent = String(e);
+  }
+});
+
+$("btnNext").addEventListener("click", async () => {
+  // 「次へ」は最低1回の再生完了が必須
+  if (playsDoneGlobal < 1) {
+    $("trialErr").textContent = "次へ進むには、音声を最後まで1回以上再生してください。";
+    return;
+  }
+
+  const t = trials[idx];
+
+  // 必須：4つの評価
+  const anger = getRadio("anger");
+  const joy = getRadio("joy");
+  const sad = getRadio("sad");
+  const unnatural = getRadio("unnatural");
+
+  if (!anger || !joy || !sad || !unnatural) {
+    $("trialErr").textContent = "怒り・喜び・悲しみ・違和感の4項目をすべて回答してください";
+    return;
+  }
+
+  const unnaturalV = parseInt(unnatural, 10);
+  const needReasons = (unnaturalV >= 2);
+  const otherText = $("r_other_text").value.trim();
+
+  const rt = Date.now() - t._shown_at;
+
+  responses.push({
+    trial_index: t.trial_index,
+    stimulus_id: t.stimulus_id,
+    sentence_id: t.sentence_id,
+    filename: t.filename,
+    true_emotion: t.emotion,
+    true_strength_label: t.strength_label,
+    true_style_weight: t.style_weight,
+    play_count: Math.min(playsDoneGlobal, 2),
+
+    rating_anger: parseInt(anger, 10),
+    rating_joy: parseInt(joy, 10),
+    rating_sadness: parseInt(sad, 10),
+    rating_unnatural: parseInt(unnatural, 10),
+
+    reason_naturalness: needReasons ? $("r_naturalness").checked : false,
+    reason_clarity: needReasons ? $("r_clarity").checked : false,
+    reason_degradation: needReasons ? $("r_degradation").checked : false,
+    reason_defect: needReasons ? $("r_defect").checked : false,
+    reason_other: needReasons ? $("r_other").checked : false,
+    reason_other_text: needReasons ? otherText : "",
+
+    rt_ms: rt,
+  });
+
+  idx++;
+  if (idx < trials.length) {
+    renderTrial();
+    return;
+  }
+
+  // 全試行終わり → 自動送信（フォームPOSTで確実に到達）
+  $("trial").style.display = "none";
+  $("finish").style.display = "block";
+  $("finishMsg").textContent = "回答を送信しています…";
+  $("finishStatus").innerHTML = "";
+
+  const payload = { participant, responses };
+
+  try {
+    await postByForm(GAS_URL, payload);
+
+    $("finishMsg").textContent = "送信しました。ご協力ありがとうございました。";
+    $("finishStatus").innerHTML = `<div class="ok">送信完了（スプレッドシートに反映されます）</div>`;
+  } catch (e) {
+    $("finishMsg").textContent = "送信に失敗しました（通信エラー）。";
+    $("finishStatus").innerHTML = `<div class="warn">${String(e)}</div>`;
+  }
+});
+</script>
+</body>
+</html>
